@@ -1,0 +1,1248 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://fsharp.github.io/fslang-spec/special-attributes-and-types/">
+      
+      
+        <link rel="prev" href="../provided-types/">
+      
+      
+        <link rel="next" href="../the-f-library-fsharpcoredll/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.11">
+    
+    
+      
+        <title>Special Attributes and Types - F# Language Specification</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.4af4bdda.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#special-attributes-and-types" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="F# Language Specification" class="md-header__button md-logo" aria-label="F# Language Specification" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            F# Language Specification
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Special Attributes and Types
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/fsharp/fslang-spec" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="F# Language Specification" class="md-nav__button md-logo" aria-label="F# Language Specification" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    F# Language Specification
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/fsharp/fslang-spec" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../front-matter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    F# Language Specification
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../program-structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Program Structure
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lexical-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lexical Analysis
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basic-grammar-elements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic Grammar Elements
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../types-and-type-constraints/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Types and Type Constraints
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Expressions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../patterns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Patterns
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../type-definitions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Type Definitions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units-of-measure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Units of Measure
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../namespaces-and-modules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Namespaces and Modules
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../namespace-and-module-signatures/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Namespace and Module Signatures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../program-structure-and-execution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Program Structure and Execution
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../custom-attributes-and-reflection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Custom Attributes and Reflection
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../inference-procedures/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inference Procedures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lexical-filtering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lexical Filtering
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../provided-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Provided Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Special Attributes and Types
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Special Attributes and Types
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#custom-attributes-recognized-by-f" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Attributes Recognized by F
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-attributes-emitted-by-f" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Attributes Emitted by F
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-attributes-not-recognized-by-f" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Attributes not Recognized by F
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exceptions-thrown-by-f-language-primitives" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exceptions Thrown by F# Language Primitives
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../the-f-library-fsharpcoredll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    The F# Library FSharp.Core.dll
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../features-for-ml-compatibility/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Features for ML Compatibility
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#custom-attributes-recognized-by-f" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Attributes Recognized by F
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-attributes-emitted-by-f" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Attributes Emitted by F
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-attributes-not-recognized-by-f" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Attributes not Recognized by F
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exceptions-thrown-by-f-language-primitives" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exceptions Thrown by F# Language Primitives
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="special-attributes-and-types">Special Attributes and Types</h1>
+<p>This chapter describes attributes and types that have special significance to the F# compiler.</p>
+<h2 id="custom-attributes-recognized-by-f">Custom Attributes Recognized by F</h2>
+<p>The following custom attributes have special meanings recognized by the F# compiler. Except where
+indicated, the attributes may be used in F# code, in referenced assemblies authored in F#, or in
+assemblies that are authored in other CLI languages.</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>System.ObsoleteAttribute <br> [\<Obsolete(...)>]</td>
+<td>Indicates that the construct is obsolete and gives a warning or error depending on the settings in the attribute. <br>This attribute may be used in both F# and imported assemblies.</td>
+</tr>
+<tr>
+<td>System.ParamArrayAttribute <br> [\<ParamArray(...)>]</td>
+<td>When applied to an argument of a method, indicates that the method can accept a variable number of arguments. <br>This attribute may be used in both F# and imported assemblies.</td>
+</tr>
+<tr>
+<td>System.ThreadStaticAttribute <br> [\<ThreadStatic(...)>]</td>
+<td>Marks a mutable static value in a class as thread static. <br>This attribute may be used in both F# and imported assemblies.</td>
+</tr>
+<tr>
+<td>System.ContextStaticAttribute <br> [\<ContextStatic(...)>]</td>
+<td>Marks a mutable static value in a class as context static. <br>This attribute may be used in both F# and imported assemblies.</td>
+</tr>
+<tr>
+<td>System.AttributeUsageAttribute <br> [\<AttributeUsage(...)>]</td>
+<td>Specifies the attribute usage targets for an attribute. <br>This attribute may be used in both F# and imported assemblies.</td>
+</tr>
+<tr>
+<td>System.Diagnostics.ConditionalAttribute <br> [\<Conditional(...)>]</td>
+<td>Emits code to call the method only if the corresponding conditional compilation symbol is defined. <br>This attribute may be used in both F# and imported assemblies.</td>
+</tr>
+<tr>
+<td>System.Reflection.AssemblyInformationalVersionAttribute <br> [\<AssemblyInformationalVersion(...)>]</td>
+<td>Attaches additional version metadata to the compiled form of the assembly. <br>This attribute may be used in both F# and imported assemblies.</td>
+</tr>
+<tr>
+<td>System.Reflection.AssemblyFileVersionAttribute <br> [\<AssemblyFileVersion(...)>]</td>
+<td>Attaches file version metadata to the compiled form of the assembly. <br>This attribute may be used in both F# and imported assemblies.</td>
+</tr>
+<tr>
+<td>System.Reflection.AssemblyDescriptionAttribute <br> [\<AssemblyDescription(...)>]</td>
+<td>Attaches descriptive metadata to the compiled form of the assembly, such as the “Comments” attribute in the Win32 version resource for the assembly. <br>This attribute may be used in both F# and imported assemblies.</td>
+</tr>
+<tr>
+<td>System.Reflection.AssemblyTitleAttribute <br> [\<AssemblyTitle(...)>]</td>
+<td>Attaches title metadata to the compiled form of the assembly, such as the “ProductName” attribute in the Win32 version resource for the assembly. <br>This attribute may be used in both F# and imported assemblies.</td>
+</tr>
+<tr>
+<td>System.Reflection.AssemblyCopyrightAttribute <br> [\<AssemblyCopyright(...)>]</td>
+<td>Attaches copyright metadata to the compiled form of the assembly, such as the “LegalCopyright” attribute in the Win32 version resource for the assembly. <br>This attribute may be used in both F# and imported assemblies.</td>
+</tr>
+<tr>
+<td>System.Reflection.AssemblyTrademarkAttribute <br> [\<AssemblyTrademark(...)>]</td>
+<td>Attaches trademark metadata to the compiled form of the assembly, such as the “LegalTrademarks” attribute in the Win32 version resource for the assembly. <br>This attribute may be used in both F# and imported assemblies.</td>
+</tr>
+<tr>
+<td>System.Reflection.AssemblyCompanyAttribute <br> [\<AssemblyCompany(...)>]</td>
+<td>Attaches company name metadata to the compiled form of the assembly, such as the “CompanyName” attribute in the Win32 version resource for the assembly. <br>This attribute may be used in both F# and imported assemblies.</td>
+</tr>
+<tr>
+<td>System.Reflection.AssemblyProductAttribute <br> [\<AssemblyProduct(...)>]</td>
+<td>Attaches product name metadata to the compiled form of the assembly, such as the “ProductName” attribute in the Win32 version resource for the assembly. <br>This attribute may be used in both F# and imported assemblies.</td>
+</tr>
+<tr>
+<td>System.Reflection.AssemblyKeyFileAttribute <br> [\<AssemblyKeyFile(...)>]</td>
+<td>Indicates to the F# compiler how to sign an assembly. <br>This attribute may be used in both F# and imported assemblies.</td>
+</tr>
+<tr>
+<td>System.Reflection.DefaultMemberAttribute <br> [\<DefaultMember(...)>]</td>
+<td>When applied to a type, specifies the name of the indexer property for that type. <br>This attribute may be used in both F# and imported assemblies.</td>
+</tr>
+<tr>
+<td>System.Runtime.CompilerServices.InternalsVisibleToAttribute [\<InternalsVisibleTo(...)>]</td>
+<td>Directs the F# compiler to permit access to the internals of the assembly. <br>This attribute may be used in both F# and imported assemblies.</td>
+</tr>
+<tr>
+<td>System.Runtime.CompilerServices.TypeForwardedToAttribute [\<TypeForwardedTo(...)>]</td>
+<td>Indicates a type redirection. <br>This attribute may be used only in imported non-F# assemblies. It is not permitted in F# code.</td>
+</tr>
+<tr>
+<td>System.Runtime.CompilerServices.ExtensionAttribute <br> [\<Extension(...)>]</td>
+<td>Indicates the compiled form of a C# extension member. <br>This attribute may be used only in imported non-F# assemblies. It is not permitted in F# code.</td>
+</tr>
+<tr>
+<td>System.Runtime.InteropServices.DllImportAttribute <br> [\<DllImport(...)>]</td>
+<td>When applied to a function definition in a module, causes the F# compiler to ignore the implementation of the definition, and instead compile it as a CLI P/Invoke stub declaration. <br>This attribute may be used in both F# and imported assemblies.</td>
+</tr>
+<tr>
+<td>System.Runtime.InteropServices.MarshalAsAttribute <br> [\<MarshalAs(...)>]</td>
+<td>When applied to a parameter or return type, specifies the marshalling attribute for a CLI P/Invoke stub declaration. <br>This attribute may be used in both F# and imported assemblies. However, F# does not support the specification of "custom" marshallers.</td>
+</tr>
+<tr>
+<td>System.Runtime.InteropServices.InAttribute <br> [\<In>]</td>
+<td>When applied to a parameter, specifies the CLI In attribute. <br>This attribute may be used in both F# and imported assemblies. However, in F# its only effect is to change the corresponding attribute in the CLI compiled form.</td>
+</tr>
+<tr>
+<td>System.Runtime.InteropServices.OutAttribute <br> [\<Out>]</td>
+<td>When applied to a parameter, specifies the CLI Out attribute. <br>This attribute may be used in both F# and imported assemblies. However, in F# its only effect is to change the corresponding attribute in the CLI compiled form.</td>
+</tr>
+<tr>
+<td>System.Runtime.InteropServices.OptionalAttribute <br> [\<Optional(...)>]</td>
+<td>When applied to a parameter, specifies the CLI Optional attribute. <br>This attribute may be used in both F# and imported assemblies. However, in F# its only effect is to change the corresponding attribute in the CLI compiled form.</td>
+</tr>
+<tr>
+<td>System.Runtime.InteropServices.FieldOffsetAttribute <br> [\<FieldOffset(...)>]</td>
+<td>When applied to a field, specifies the field offset of the underlying CLI field. <br>This attribute may be used in both F# and imported assemblies.</td>
+</tr>
+<tr>
+<td>System.NonSerializedAttribute <br> [\<NonSerialized>]</td>
+<td>When applied to a field, sets the "not serialized" bit for the underlying CLI field. <br>This attribute may be used in both F# and imported assemblies.</td>
+</tr>
+<tr>
+<td>System.Runtime.InteropServices.StructLayoutAttribute <br> [\<StructLayout(...)>]</td>
+<td>Specifies the layout of a CLI type. <br>This attribute may be used in both F# and imported assemblies.</td>
+</tr>
+<tr>
+<td>FSharp.Core.AutoSerializableAttribute <br> [\<AutoSerializable(false)>]</td>
+<td>When added to a type with value false , disables default serialization, so that F# does not make the type serializable. <br>This attribute should be used only in F# assemblies.</td>
+</tr>
+<tr>
+<td>FSharp.Core.CLIMutableAttribute <br> [\<CLIMutable>]</td>
+<td>When specified, a record type is compiled to a CLI representation with a default constructor with property getters and setters. <br>This attribute should be used only in F# assemblies.</td>
+</tr>
+<tr>
+<td>FSharp.Core.AutoOpenAttribute <br> [\<AutoOpen>]</td>
+<td>When applied to an assembly and given a string argument, causes the namespace or module to be opened automatically when the assembly is referenced. When applied to a module without a string argument, causes the module to be opened automatically when the enclosing namespace or module is opened. <br>This attribute should be used only in F# assemblies. FSharp.Core.</td>
+</tr>
+<tr>
+<td>CompilationRepresentationAttribute <br> [\<CompilationRepresentation(...)>]</td>
+<td>Adjusts the runtime representation of a type. <br>This attribute should be used only in F# assemblies.</td>
+</tr>
+<tr>
+<td>FSharp.Core.CompiledNameAttribute <br> [\<CompiledName(...)>]</td>
+<td>Changes the compiled name of an F# language construct. <br>This attribute should be used only in F# assemblies.</td>
+</tr>
+<tr>
+<td>FSharp.Core.CustomComparisonAttribute <br> [\<CustomComparison>]</td>
+<td>When applied to an F# structural type, indicates that the type has a user-specified comparison implementation. <br>This attribute should be used only in F# assemblies.</td>
+</tr>
+<tr>
+<td>FSharp.Core.CustomEqualityAttribute <br> [\<CustomEquality>]</td>
+<td>When applied to an F# structural type, indicates that the type has a user-defined equality implementation. <br>This attribute should be used only in F# assemblies.</td>
+</tr>
+<tr>
+<td>FSharp.Core.DefaultAugmentationAttribute <br> [\<DefaultAugmentation(...)>]</td>
+<td>When applied to an F# discriminated union type with value false, turns off the generation of standard helper member tester, constructor and accessor members for the generated CLI class for that type. <br>This attribute should be used only in F# assemblies.</td>
+</tr>
+<tr>
+<td>FSharp.Core.DefaultValueAttribute <br> [\<DefaultValue(...)>]</td>
+<td>When added to a field declaration, specifies that the field is not initialized. During type checking, a constraint is asserted that the field type supports null. If the argument to the attribute is <code>false</code>, the constraint is not asserted. <br>This attribute should be used only in F# assemblies.</td>
+</tr>
+<tr>
+<td>FSharp.Core.GeneralizableValueAttribute <br> [\<GeneralizableValue>]</td>
+<td>When applied to an F# value, indicates that uses of the attribute can result in generic code through the process of type inference. For example, <code>Set.empty</code>. The value must typically be a type function whose implementation has no observable side effects. <br>This attribute should be used only in F# assemblies.</td>
+</tr>
+<tr>
+<td>FSharp.Core.LiteralAttribute <br> [\<Literal>]</td>
+<td>When applied to a value, compiles the value as a CLI literal. <br>This attribute should be used only in F# assemblies.</td>
+</tr>
+<tr>
+<td>FSharp.Core.NoDynamicInvocationAttribute <br> [\<NoDynamicInvocation>]</td>
+<td>When applied to an inline function or member definition, replaces the generated code with a stub that throws an exception at runtime. This attribute is used to replace the default generated implementation of unverifiable inline members with a verifiable stub. <br>This attribute should be used only in F# assemblies.</td>
+</tr>
+<tr>
+<td>FSharp.Core.CompilerMessageAttribute <br> [\<CompilerMessage(...)>]</td>
+<td>When applied to an F# construct, indicates that the F# compiler should report a message when the construct is used. <br>This attribute should be used only in F# assemblies.</td>
+</tr>
+<tr>
+<td>FSharp.Core.StructAttribute <br> [\<Struct>]</td>
+<td>Indicates that a type is a struct type. <br>This attribute should be used only in F# assemblies.</td>
+</tr>
+<tr>
+<td>FSharp.Core.ClassAttribute <br> [\<Class>]</td>
+<td>Indicates that a type is a class type. <br>This attribute should be used only in F# assemblies.</td>
+</tr>
+<tr>
+<td>FSharp.Core.InterfaceAttribute <br> [\<Interface>]</td>
+<td>Indicates that a type is an interface type. <br>This attribute should be used only in F# assemblies.</td>
+</tr>
+<tr>
+<td>FSharp.Core.MeasureAttribute <br> [\<Measure>]</td>
+<td>Indicates that a type or generic parameter is a unit of measure definition or annotation. <br>This attribute should be used only in F# assemblies.</td>
+</tr>
+<tr>
+<td>FSharp.Core.ReferenceEqualityAttribute <br> [\<ReferenceEquality>]</td>
+<td>When applied to an F# record or union type, indicates that the type should use reference equality for its default equality implementation. <br>This attribute should be used only in F# assemblies.</td>
+</tr>
+<tr>
+<td>FSharp.Core.ReflectedDefinitionAttribute <br> [\<ReflectedDefinition>]</td>
+<td>Makes the quotation form of a definition available at runtime through the FSharp.Quotations. Expr.GetReflectedDefinition method. <br>This attribute should be used only in F# assemblies. FSharp.Core.</td>
+</tr>
+<tr>
+<td>RequireQualifiedAccessAttribute <br> [\<RequireQualifiedAccess>]</td>
+<td>When applied to an F# module, warns if an attempt is made to open the module name. When applied to an F# union or record type, indicates that the field labels or union cases must be referenced by using a qualified path that includes the type name. <br>This attribute should be used only in F# assemblies.</td>
+</tr>
+<tr>
+<td>RequiresExplicitTypeArgumentsAttribute <br> [\<RequiresExplicitTypeArguments>]</td>
+<td>When applied to an F# function or method, indicates that the function or method must be invoked with explicit type arguments, such as typeof<int>. <br>This attribute should be used only in F# assemblies.</td>
+</tr>
+<tr>
+<td>FSharp.Core.StructuralComparisonAttribute <br> [\<StructuralComparison>]</td>
+<td>When added to a record, union, exception, or structure type, confirms the automatic generation of implementations for <code>IComparable</code> for the type. <br>This attribute should only be used in F# assemblies.</td>
+</tr>
+<tr>
+<td>FSharp.Core.StructuralEqualityAttribute <br> [\<StructuralEquality>]</td>
+<td>When added to a record, union, or struct type, confirms the automatic generation of overrides for <code>Equals</code> and <code>GetHashCode</code> for the type. <br>This attribute should be used only in F# assemblies.</td>
+</tr>
+<tr>
+<td>FSharp.Core.VolatileFieldAttribute <br> [\<VolatileField>]</td>
+<td>When applied to an F# field or mutable value definition, controls whether the CLI volatile prefix is emitted before accesses to the field. <br>This attribute should be used only in F# assemblies.</td>
+</tr>
+<tr>
+<td>FSharp.Core.TypeProviderXmlDocAttribute</td>
+<td>Specifies documentation for provided type definitions and provided members</td>
+</tr>
+<tr>
+<td>FSharp.Core.TypeProviderDefinitionLocationAttribute</td>
+<td>Specifies location information for provided type definitions and provided members</td>
+</tr>
+</tbody>
+</table>
+<h2 id="custom-attributes-emitted-by-f">Custom Attributes Emitted by F</h2>
+<p>The F# compiler can emit the following custom attributes:</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>System.Diagnostics.DebuggableAttribute</td>
+<td>Improves debuggability of F# code.</td>
+</tr>
+<tr>
+<td>System.Diagnostics.DebuggerHiddenAttribute</td>
+<td>Improves debuggability of F# code.</td>
+</tr>
+<tr>
+<td>System.Diagnostics.DebuggerDisplayAttribute</td>
+<td>Improves debuggability of F# code.</td>
+</tr>
+<tr>
+<td>System.Diagnostics.DebuggerBrowsableAttribute</td>
+<td>Improves debuggability of F# code.</td>
+</tr>
+<tr>
+<td>System.Runtime.CompilerServices.CompilationRelaxationsAttribute</td>
+<td>Enables extra JIT optimizations.</td>
+</tr>
+<tr>
+<td>System.Runtime.CompilerServices.CompilerGeneratedAttribute</td>
+<td>Indicates that a method, type, or property is generated by the F# compiler, and does not correspond directly</td>
+</tr>
+<tr>
+<td>System.Reflection.DefaultMemberAttribute</td>
+<td>Specifies the name of the indexer property for a class.</td>
+</tr>
+<tr>
+<td>FSharp.Core.CompilationMappingAttribute</td>
+<td>Indicates how a CLI construct corresponds to an F# source language construct.</td>
+</tr>
+<tr>
+<td>FSharp.Core.FSharpInterfaceDataVersionAttribute</td>
+<td>Defines the schema number for the embedded binary resource for F#-specific interface and optimization data.</td>
+</tr>
+<tr>
+<td>FSharp.Core.OptionalArgumentAttribute</td>
+<td>Indicates optional arguments to F# members.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="custom-attributes-not-recognized-by-f">Custom Attributes not Recognized by F</h2>
+<p>The following custom attributes are defined in some CLI implementations and may appear to be
+relevant to F#. However, they either do not affect the behavior of the F# compiler, or result in an
+error when used in in F# code.</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>System.Runtime.CompilerServices.DecimalConstantAttribute</td>
+<td>The F# compiler ignores this attribute.<br>However, if used in F# code, it can cause some other CLI languages to interpret a decimal constant as a compile-time literal.</td>
+</tr>
+<tr>
+<td>System.Runtime.CompilerServices.RequiredAttributeAttribute</td>
+<td>Do not use this attribute in F# code.<br> The F# compiler ignores it or returns an error.</td>
+</tr>
+<tr>
+<td>System.Runtime.InteropServices.DefaultParameterValueAttribute</td>
+<td>Do not use this attribute in F# code.<br>The F# compiler ignores it or returns an error.</td>
+</tr>
+<tr>
+<td>System.Runtime.InteropServices.UnmanagedFunctionPointerAttribute</td>
+<td>Do not use this attribute in F# code.<br>The F# compiler ignores it or returns an error.</td>
+</tr>
+<tr>
+<td>System.Runtime.CompilerServices.FixedBufferAttribute</td>
+<td>Do not use this attribute in F# code.<br>The F# compiler ignores it or returns an error.</td>
+</tr>
+<tr>
+<td>System.Runtime.CompilerServices.UnsafeValueTypeAttribute</td>
+<td>Do not use this attribute in F# code.<br>The F# compiler ignores it or returns an error.</td>
+</tr>
+<tr>
+<td>System.Runtime.CompilerServices.SpecialNameAttribute</td>
+<td>Do not use this attribute in F# code.<br>The F# compiler ignores it or returns an error.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="exceptions-thrown-by-f-language-primitives">Exceptions Thrown by F# Language Primitives</h2>
+<p>Certain F# language and primitive library operations throw the following exceptions.</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>System.ArithmeticException</td>
+<td>An arithmetic operation failed. This is the base class for exceptions such as System.DivideByZeroException and System.OverflowException.</td>
+</tr>
+<tr>
+<td>System.ArrayTypeMismatchException</td>
+<td>An attempt to store an element in an array failed because the runtime type of the stored element is incompatible with the runtime type of the array.</td>
+</tr>
+<tr>
+<td>System.DivideByZeroException</td>
+<td>An attempt to divide an integral value by zero occurred.</td>
+</tr>
+<tr>
+<td>System.IndexOutOfRangeException</td>
+<td>An attempt to index an array failed because the index is less than zero or outside the bounds of the array.</td>
+</tr>
+<tr>
+<td>System.InvalidCastException</td>
+<td>An explicit conversion from a base type or interface to a derived type failed at run time.</td>
+</tr>
+<tr>
+<td>System.NullReferenceException</td>
+<td>A null reference was used in a way that caused the referenced object to be required.</td>
+</tr>
+<tr>
+<td>System.OutOfMemoryException</td>
+<td>An attempt to use new to allocate memory failed.</td>
+</tr>
+<tr>
+<td>System.OverflowException</td>
+<td>An arithmetic operation in a checked context overflowed.</td>
+</tr>
+<tr>
+<td>System.StackOverflowException</td>
+<td>The execution stack was exhausted because of too many pending method calls, which typically indicates deep or unbounded recursion.</td>
+</tr>
+<tr>
+<td>System.TypeInitializationException</td>
+<td>F# initialization code for a type threw an exception that was not caught.</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2005-2025 F# contributors. Made available under the <a href='https://creativecommons.org/licenses/by/4.0/'>Creative Commons CC-by 4.0</a> licence.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>
